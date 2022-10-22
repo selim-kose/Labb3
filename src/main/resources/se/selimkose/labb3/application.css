@@ -1,0 +1,38 @@
+.root {
+    -fx-background-color: linear-gradient(to bottom right, #eae4e4, #374059);
+
+}
+
+.button {
+    -fx-hgap: 10;
+
+}
+
+#hbox {
+    -fx-border-color: black;
+    -fx-background-color: #c7c2c2;
+
+}
+
+.button:hover {
+    -fx-background-color: #6060a4;
+    -fx-text-fill: red;
+
+}
+
+#canvas {
+    -fx-border-color: black;
+
+}
+
+#borderPane {
+    -fx-border-color: black;
+}
+
+#pane {
+    -fx-border-color: black;
+}
+
+
+
+
