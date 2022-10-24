@@ -19,26 +19,19 @@ public class GeometriChatApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-
         FXMLLoader fxmlLoader = new FXMLLoader(GeometriChatApplication.class.getResource("main-view.fxml"));
-
         Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
+
         scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-
-
-
-
         stage.getIcons().add(new Image(getClass().getResourceAsStream("geometry.png")));
         stage.setTitle("Geometri Chat");
+
         stage.setScene(scene);
         stage.show();
-
 
     }
 
     public static void main(String[] args) {
-
-
 
         launch(GeometriChatApplication.class);
     }

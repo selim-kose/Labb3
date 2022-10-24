@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.canvas.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
 <BorderPane id="borderPane" prefHeight="768.0" prefWidth="1002.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se.selimkose.labb3.Controller">
     <top>
         <HBox id="hbox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="button" graphicTextGap="450.0" onAction="#drawCircle" prefHeight="25.0" prefWidth="52.0" text="Circle" />
-                <Button fx:id="button1" onAction="#drawTriangle" text="Triangle" />
-                <Button fx:id="button11" onAction="#drawCircle" text="Line" />
-                <Button fx:id="button2" graphicTextGap="450.0" layoutX="10.0" layoutY="47.0" onAction="#drawCircle" text="Rectangle">
-                    <opaqueInsets>
-                        <Insets left="5.0" right="5.0" />
-                    </opaqueInsets>
-                </Button>
-            <ChoiceBox fx:id="choiceBoxSize" layoutX="509.0" layoutY="47.0" onAction="#setSize" prefWidth="50.0" value="Size" />
-                <ChoiceBox fx:id="choiceBoxShape" onAction="#setShape" prefWidth="60.0" value="Shape">
-                </ChoiceBox>
+                <ChoiceBox fx:id="choiceBoxShape" onAction="#setShape" prefHeight="27.0" prefWidth="74.0" value="Shape" />
                 <ColorPicker fx:id="colorPicker" prefHeight="25.0" prefWidth="94.0" />
-            <Button fx:id="test" mnemonicParsing="false" onAction="#setView" text="Change" />
-            <Button fx:id="test1" layoutX="723.0" layoutY="47.0" mnemonicParsing="false" onAction="#setView" text="Save" />
+               <!-- <Button fx:id="changeScene" mnemonicParsing="false" onAction="#setView" text="Change" />-->
+                <Button fx:id="save" layoutX="723.0" layoutY="47.0" mnemonicParsing="false" onAction="#saveFile" text="Save" />
+                <Slider fx:id="sizeSlider" majorTickUnit="10.0" min="10.0" prefHeight="37.0" prefWidth="175.0" showTickLabels="true" showTickMarks="true" value="10.0" />
+                <Button onAction="#clearCanvas" text="Clear" />
+            <Button mnemonicParsing="false" text="Undo" />
+            <Button mnemonicParsing="false" text="Redo" />
             </children>
-            <opaqueInsets>
-                <Insets left="5.0" right="5.0" />
-            </opaqueInsets>
         </HBox>
     </top>
-   <left>
-      <Pane prefHeight="668.0" prefWidth="526.0" BorderPane.alignment="CENTER">
-         <children>
-              <Canvas id="canvas" fx:id="canvas" height="668.0" onMouseClicked="#canvasMousePosition" width="730.0" />
-         </children>
-      </Pane>
-   </left>
-   <right>
-      <Pane id="pane" prefHeight="668.0" prefWidth="469.0" BorderPane.alignment="CENTER" />
-   </right>
+    <left>
+        <Pane prefHeight="668.0" prefWidth="526.0" BorderPane.alignment="CENTER">
+            <children>
+                <Canvas id="canvas" fx:id="canvas" height="668.0" onMouseClicked="#canvasMousePosition" width="730.0" />
+            </children>
+        </Pane>
+    </left>
+    <right>
+        <Pane id="pane" prefHeight="668.0" prefWidth="469.0" BorderPane.alignment="CENTER">
+            <children>
+                <ImageView fx:id="imageView" fitHeight="655.0" fitWidth="466.0" pickOnBounds="true" preserveRatio="true">
+                    <!-- <image>
+                         <Image ></Image>
+                     </image>-->
+                </ImageView>
+
+            </children>
+        </Pane>
+    </right>
 </BorderPane>

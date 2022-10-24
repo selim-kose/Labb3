@@ -10,4 +10,20 @@ public class GeometriChatModel {
   private List<Shape> shapes = new ArrayList<>();
 
 
+  public GeometriChatModel(){
+
+  }
+
+  public List<Shape> getShapes() {
+    return shapes;
+  }
+
+  public void undo(){
+    shapes.remove(shapes.size()-1);
+  }
+
+  public void clearAll(){
+    shapes.clear();
+  }
+
 }

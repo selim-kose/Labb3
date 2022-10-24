@@ -16,6 +16,8 @@ public class Shape {
     private GraphicsContext graphicsContext;
 
 
+
+
     public Shape(Position position, Color color, Canvas canvas, GraphicsContext graphicsContext) {
         this.position = position;
         this.color = color;
