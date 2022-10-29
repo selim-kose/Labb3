@@ -2,41 +2,58 @@
 
 <?import javafx.scene.canvas.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane id="borderPane" prefHeight="768.0" prefWidth="1002.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se.selimkose.labb3.Controller">
-    <top>
-        <HBox id="hbox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
+<FlowPane prefHeight="691.0" prefWidth="1022.0" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se.selimkose.labb3.Controller">
             <children>
-                <ChoiceBox fx:id="choiceBoxShape" onAction="#setShape" prefHeight="27.0" prefWidth="74.0" value="Shape" />
-                <ColorPicker fx:id="colorPicker" prefHeight="25.0" prefWidth="94.0" />
-               <!-- <Button fx:id="changeScene" mnemonicParsing="false" onAction="#setView" text="Change" />-->
-                <Button fx:id="save" layoutX="723.0" layoutY="47.0" mnemonicParsing="false" onAction="#saveFile" text="Save" />
-                <Slider fx:id="sizeSlider" majorTickUnit="10.0" min="10.0" prefHeight="37.0" prefWidth="175.0" showTickLabels="true" showTickMarks="true" value="10.0" />
-                <Button onAction="#clearCanvas" text="Clear" />
-            <Button mnemonicParsing="false" text="Undo" />
-            <Button mnemonicParsing="false" text="Redo" />
-            </children>
-        </HBox>
-    </top>
-    <left>
-        <Pane prefHeight="668.0" prefWidth="526.0" BorderPane.alignment="CENTER">
-            <children>
-                <Canvas id="canvas" fx:id="canvas" height="668.0" onMouseClicked="#canvasMousePosition" width="730.0" />
-            </children>
-        </Pane>
-    </left>
-    <right>
-        <Pane id="pane" prefHeight="668.0" prefWidth="469.0" BorderPane.alignment="CENTER">
-            <children>
-                <ImageView fx:id="imageView" fitHeight="655.0" fitWidth="466.0" pickOnBounds="true" preserveRatio="true">
-                    <!-- <image>
-                         <Image ></Image>
-                     </image>-->
-                </ImageView>
+      <MenuBar prefHeight="25.0" prefWidth="1108.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+                <HBox id="hbox" alignment="CENTER" prefHeight="58.0" prefWidth="1099.0" spacing="20.0">
+                    <children>
+                        <ChoiceBox fx:id="choiceBoxShape" onAction="#setShape" prefHeight="27.0" prefWidth="74.0" value="Shape" />
+                        <ColorPicker fx:id="colorPicker" prefHeight="25.0" prefWidth="94.0" />
+                        <!-- <Button fx:id="changeScene" mnemonicParsing="false" onAction="#setView" text="Change" />-->
+                        <Button fx:id="save" layoutX="723.0" layoutY="47.0" mnemonicParsing="false" onAction="#saveFile" text="Save" />
+                        <Slider fx:id="sizeSlider" majorTickUnit="10.0" min="10.0" prefHeight="37.0" prefWidth="175.0" showTickLabels="true" showTickMarks="true" value="10.0" />
+                        <Button onAction="#clearCanvas" text="Clear" />
+                        <Button mnemonicParsing="false" onAction="#undo" text="Undo" />
+                        <Button mnemonicParsing="false" onAction="#redo" text="Redo" />
+                    </children>
+                </HBox>
+                <Pane id="canvasPane" prefHeight="668.0" prefWidth="609.0">
+                    <children>
+                        <Canvas id="canvas" fx:id="canvas" height="668.0" onMouseClicked="#canvasMousePosition" width="616.0" />
+                    </children>
+                </Pane>
+                <AnchorPane id="chatPane" prefHeight="668.0" prefWidth="489.0">
+                    <children>
+                      <Button fx:id="buttonSend" onAction="#sendMessage" layoutX="410.0" layoutY="589.0" prefHeight="25.0" prefWidth="55.0" text="Send" />
+                        <TextField fx:id="textFieldMessage" layoutX="22.0" layoutY="588.0" prefHeight="27.0" prefWidth="375.0" />
+                        <ListView fx:id="messageListView" layoutX="21.0" layoutY="75.0" prefHeight="473.0" prefWidth="444.0">
 
+                        </ListView>
+                        <Label layoutX="163.0" layoutY="25.0" prefHeight="17.0" prefWidth="228.0" text="Chat">
+
+                        </Label>
+
+                    </children>
+                </AnchorPane>
             </children>
-        </Pane>
-    </right>
-</BorderPane>
+        </FlowPane>

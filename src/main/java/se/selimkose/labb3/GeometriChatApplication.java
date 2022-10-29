@@ -33,6 +33,9 @@ public class GeometriChatApplication extends Application {
 
     public static void main(String[] args) {
 
+     
+
+
         launch(GeometriChatApplication.class);
     }
 }

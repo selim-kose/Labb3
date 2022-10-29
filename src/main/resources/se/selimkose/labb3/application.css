@@ -20,17 +20,17 @@
 
 }
 
-#canvas {
-    -fx-border-color: black;
-
-}
 
 #borderPane {
     -fx-border-color: black;
 }
 
-#pane {
+#chatPane {
     -fx-border-color: black;
+
+}
+#canvasPane {
+    -fx-background-color: White;
 }
 
 

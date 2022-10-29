@@ -12,17 +12,13 @@ public class Shape {
 
     private Position position;
     private Color color;
-    private Canvas canvas;
-    private GraphicsContext graphicsContext;
+    private double size;
 
 
-
-
-    public Shape(Position position, Color color, Canvas canvas, GraphicsContext graphicsContext) {
+    public Shape(Position position, Color color, double size) {
         this.position = position;
         this.color = color;
-        this.canvas = canvas;
-        this.graphicsContext = graphicsContext;
+        this.size = size;
     }
 
     public Position getPosition() {
@@ -41,19 +37,11 @@ public class Shape {
         this.color = color;
     }
 
-    public Canvas getCanvas() {
-        return canvas;
+    public double getSize() {
+        return size;
     }
 
-    public void setCanvas(Canvas canvas) {
-        this.canvas = canvas;
-    }
-
-    public GraphicsContext getGraphicsContext() {
-        return graphicsContext;
-    }
-
-    public void setGraphicsContext(GraphicsContext graphicsContext) {
-        this.graphicsContext = graphicsContext;
+    public void setSize(int size) {
+        this.size = size;
     }
 }

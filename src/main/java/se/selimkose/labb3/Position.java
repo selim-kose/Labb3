@@ -1,5 +1,5 @@
 package se.selimkose.labb3;
 
-public record Position(double x, double y) {
+public record Position(int x, int y) {
 
 }

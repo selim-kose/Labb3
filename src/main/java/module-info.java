@@ -1,6 +1,8 @@
 module com.example.labb3 {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.desktop;
+    requires javafx.swing;
 
 
     opens se.selimkose.labb3 to javafx.fxml;
