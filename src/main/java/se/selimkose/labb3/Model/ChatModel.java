@@ -15,6 +15,9 @@ public class ChatModel {
 
     //ArrayList that broadcasts messages to listeners when updated
     ObservableList<String> observableList = FXCollections.observableArrayList();
+
+
+
     private Socket socket;
     private BufferedWriter writer;
     private BufferedReader reader;
@@ -34,6 +37,9 @@ public class ChatModel {
                 try {
                     while (socket.isConnected()) {
                         String line = reader.readLine();
+
+                        //Runs on the javafx thread when the thread is not busy.
+                        // Without Platform.runLater program crashes because running javafx operations on different threads is snot allowed
                         Platform.runLater(() -> observableList.add(line));
                     }
                 } catch (IOException e) {
@@ -70,6 +76,9 @@ public class ChatModel {
     public void setObservableList(ObservableList<String> observableList) {
         this.observableList = observableList;
     }
+    public Socket getSocket() {
+        return socket;
+    }
 
     public void sendMessage() {
         try {
@@ -82,6 +91,6 @@ public class ChatModel {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        setMessage(""); // Sets message to empty. Hinders button to send in GUI
+        setMessage(""); // Sets message to empty.Clears messageTextField and hinders button to send in GUI
     }
 }

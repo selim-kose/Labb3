@@ -1,6 +1,6 @@
-package se.selimkose.labb3;
+package se.selimkose.labb3.Model;
 
-import se.selimkose.labb3.Model.Shape;
+import se.selimkose.labb3.Model.Shape.Shape;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -2,16 +2,11 @@ package se.selimkose.labb3;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import se.selimkose.labb3.Model.Circle;
-import se.selimkose.labb3.Model.Shape;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class GeometriChatApplication extends Application {
 
