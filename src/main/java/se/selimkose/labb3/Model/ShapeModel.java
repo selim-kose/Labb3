@@ -1,59 +1,99 @@
 package se.selimkose.labb3.Model;
 
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 import se.selimkose.labb3.Model.Shape.Circle;
 import se.selimkose.labb3.Model.Shape.Rectangle;
 import se.selimkose.labb3.Model.Shape.Shape;
+import se.selimkose.labb3.Model.Shape.ShapeType;
 
-public class ShapeModel implements UIAction {
-   // List<Shape> shapes = new ArrayList<>();
-   ObservableList<Shape> observableShapeList = FXCollections.observableArrayList();
+import java.util.ArrayList;
+import java.util.List;
 
+public class ShapeModel{
+   List<Shape> shapes = new ArrayList<>();
+   List<Shape> redoShapeList = new ArrayList<>();
+   ObservableList<ShapeType> shapeList = FXCollections.observableArrayList(ShapeType.values());
+   ObjectProperty<Color> currentColor = new SimpleObjectProperty<>(Color.RED);
+   DoubleProperty currentSize = new SimpleDoubleProperty(50);
+   ObjectProperty<ShapeType> currentShapeType = new SimpleObjectProperty(ShapeType.CIRCLE);
+
+    public ShapeType getCurrentShapeType() {
+        return currentShapeType.get();
+    }
+
+    public ObjectProperty<ShapeType> currentShapeTypeProperty() {
+        return currentShapeType;
+    }
+
+    public void setCurrentShapeType(ShapeType currentShapeType) {
+        this.currentShapeType.set(currentShapeType);
+    }
+
+    public double getCurrentSize() {
+        return currentSize.get();
+    }
+
+    public DoubleProperty currentSizeProperty() {
+        return currentSize;
+    }
+
+    public void setCurrentSize(double currentSize) {
+        this.currentSize.set(currentSize);
+    }
+
+    public ObservableList<ShapeType> getShapeList() {
+        return shapeList;
+    }
+
+    public void setShapeList(ObservableList<ShapeType> shapeList) {
+        this.shapeList = shapeList;
+    }
+
+    public Color getCurrentColor() {
+        return currentColor.get();
+    }
+
+    public ObjectProperty<Color> currentColorProperty() {
+        return currentColor;
+    }
+
+    public void setCurrentColor(Color currentColor) {
+        this.currentColor.set(currentColor);
+    }
 
     public ShapeModel(){
 
     }
 
-
-  /*  public void draw(){
-        shapes.get(shapes.size()-1);
-    }
-
-    public void add(Shape shape){shapes.add(shape);}*/
-
     public void add(Shape shape) {
-        observableShapeList.add(shape);
-    }
-    public void removeLast(){
-       observableShapeList.remove(observableShapeList.size()-1);
+        shapes.add(shape);
     }
 
-    public ObservableList<Shape> getObservableShapeList() {
-        return observableShapeList;
+    public List<Shape> getShapesList(){
+        return shapes;
     }
 
-    @Override
-    public void draw() {
-
-
-    }
 
     public void undo(){
-
-        if(observableShapeList.isEmpty()){
+        if(shapes.isEmpty()){
             return;
         }
-        observableShapeList.remove(observableShapeList.size()-1);
+        redoShapeList.add(shapes.get(shapes.size()-1));
+        shapes.remove(shapes.size()-1);
     }
 
-    public void setObservableShapeList(ObservableList<Shape> observableShapeList) {
-        this.observableShapeList = observableShapeList;
+    public void redo(){
+        System.out.println(redoShapeList.get(redoShapeList.size()-1));
+        shapes.add(redoShapeList.get(redoShapeList.size()-1));
     }
+
 
     public void renderShapes(GraphicsContext graphicsContext) {
-        for (Shape i : observableShapeList) {
+        for (Shape i : shapes) {
             graphicsContext.setFill(i.getColor());
             if (i instanceof Circle) {
                 graphicsContext.fillOval(i.getPosition().x() - (i.getSize() / 2), i.getPosition().y() - (i.getSize() / 2), i.getSize(), i.getSize());

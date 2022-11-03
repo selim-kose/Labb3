@@ -51,7 +51,7 @@ public class Save {
                     "<svg width=\"" + canvas.getWidth() + "\" height=\"" + canvas.getHeight() + "\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
                     "\n");
 
-            for (Shape s : shapeModel.getObservableShapeList()) {
+            for (Shape s : shapeModel.shapes) {
                 String color = s.getColor().toString().substring(2, 8);
                 if (s instanceof Rectangle) {
                     fileWriter.append("<" + s.getType() + " x=\"" + s.getPosition().x() + "\" y=\"" + s.getPosition().y() + "\" width=\"" + s.getSize() + "\" height=\"" + s.getSize() + "\" fill=\"#" + color + "\" stroke-width=\"5\"/>\n");

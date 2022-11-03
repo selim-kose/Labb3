@@ -29,14 +29,14 @@
               </MenuBar>
               <HBox id="hbox" alignment="CENTER" spacing="20.0" VBox.vgrow="ALWAYS">
                   <children>
-                      <ChoiceBox fx:id="choiceBoxShape" onAction="#setShape" prefHeight="27.0" prefWidth="74.0" value="Shape" />
+                      <ChoiceBox fx:id="choiceBoxShape"  prefHeight="27.0" prefWidth="74.0" value="Shape" />
                       <ColorPicker fx:id="colorPicker" prefHeight="25.0" prefWidth="94.0" />
                       <!-- <Button fx:id="changeScene" mnemonicParsing="false" onAction="#setView" text="Change" />-->
                       <Button fx:id="save" layoutX="723.0" layoutY="47.0" mnemonicParsing="false" onAction="#saveFile" text="Save" />
                       <Slider fx:id="sizeSlider" majorTickUnit="10.0" min="10.0" prefHeight="37.0" prefWidth="175.0" showTickLabels="true" showTickMarks="true" value="10.0" />
                       <Button onAction="#clearCanvas" text="Clear" />
-                      <Button mnemonicParsing="false" text="Undo" />
-                      <Button mnemonicParsing="false"  text="Redo" />
+                      <Button mnemonicParsing="false" onAction="#undo" text="Undo" />
+                      <Button mnemonicParsing="false"  onAction="#redo" text="Redo" />
                       <Button mnemonicParsing="false" onAction="#saveSVG" text="SVG" />
                   </children>
               </HBox>
@@ -44,7 +44,7 @@
       </VBox>
         <Pane id="canvasPane" prefHeight="668.0" prefWidth="609.0">
             <children>
-                <Canvas id="canvas" fx:id="canvas" height="720.0" onMouseClicked="#canvasMousePosition" width="616.0" />
+                <Canvas id="canvas" fx:id="canvas" height="720.0" onMouseClicked="#canvasAction" width="616.0" />
             </children>
         </Pane>
         <AnchorPane id="chatPane" prefHeight="720.0" prefWidth="590.0">

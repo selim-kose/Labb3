@@ -1,10 +1,8 @@
 package se.selimkose.labb3.Model.Shape;
 
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import se.selimkose.labb3.Model.Position;
-import se.selimkose.labb3.Model.ShapeBuilder;
 
 
 public class Circle extends Shape{
@@ -31,6 +29,16 @@ public class Circle extends Shape{
     }
 
 
+    public boolean isInside(double x, double y) {
+        double dx = x - getPosition().x();
+        double dy = y - getPosition().y();
+
+        double distanceFromCircleCenterSquared = dx * dx + dy * dy;
+
+        return distanceFromCircleCenterSquared < getSize()*getSize();
+    }
+
+
 
     public String getType() {
         return type;
@@ -40,10 +48,5 @@ public class Circle extends Shape{
         this.type = type;
     }
 
-    public void buildCirlce(MouseEvent mouseEvent){
-        ShapeBuilder shapeBuilder = new ShapeBuilder();
 
-
-
-    }
 }

@@ -27,6 +27,18 @@ public class Shape {
         };
     }
 
+    public boolean isInside(double x, double y) {
+        double dx = x - getPosition().x();
+        double dy = y - getPosition().y();
+
+        double distanceFromCircleCenterSquared = dx * dx + dy * dy;
+
+        return distanceFromCircleCenterSquared < getSize()*getSize();
+    }
+
+
+    //public boolean isInside(double x, double y);
+
     public Position getPosition() {
         return position;
     }

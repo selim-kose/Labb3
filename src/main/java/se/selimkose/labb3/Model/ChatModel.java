@@ -43,7 +43,8 @@ public class ChatModel {
                         Platform.runLater(() -> observableList.add(line));
                     }
                 } catch (IOException e) {
-                    throw new RuntimeException(e);
+                    System.out.println ("Could not read incoming message");
+                    e.printStackTrace();
                 }
             });
             //Daemon true ser till att inte hindra programmet att avslutas.

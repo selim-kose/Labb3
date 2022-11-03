@@ -49,10 +49,7 @@ public class Controller implements Initializable {
     @FXML
     private Canvas canvas = new Canvas();
     public GraphicsContext graphicsContext;
-    public FileChooser fileChoser = new FileChooser();
-    List<ShapeType> shapesList = List.of(ShapeType.values());
-    ObservableList<ShapeType> shapeTypeObservableList = FXCollections.observableArrayList(ShapeType.values());
-    private ShapeType shape = shapeTypeObservableList.get(1);
+    private ShapeType shape = ShapeType.CIRCLE;
     @FXML
     public Button buttonSend;
     @FXML
@@ -63,8 +60,11 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         graphicsContext = canvas.getGraphicsContext2D();
-        choiceBoxShape.getItems().addAll(shapesList);
-        //shape = ShapeType.CIRCLE;
+        choiceBoxShape.getItems().addAll(shapeModel.getShapeList());
+        choiceBoxShape.valueProperty().bindBidirectional(shapeModel.currentShapeTypeProperty());
+        colorPicker.valueProperty().bindBidirectional(shapeModel.currentColorProperty());
+        sizeSlider.valueProperty().bindBidirectional(shapeModel.currentSizeProperty());
+
 
         textFieldMessage.textProperty().bindBidirectional(chatModel.messageProperty());
         messageListView.setItems(chatModel.getObservableList());
@@ -72,44 +72,47 @@ public class Controller implements Initializable {
 
     }
 
+    public void undo() {
+        shapeModel.undo();
+        graphicsContext.clearRect(0, 0, canvas.getHeight(), canvas.getWidth());
+        shapeModel.renderShapes(graphicsContext);
+    }
+
+    public void redo() {
+        shapeModel.redo();
+        shapeModel.renderShapes(graphicsContext);
+    }
+
     public void clearCanvas() {
-        shapeModel.getObservableShapeList().clear();
+        shapeModel.getShapesList().clear();
         graphicsContext.clearRect(0, 0, canvas.getHeight(), canvas.getWidth());
     }
 
 
-    public void drawTriangle() {
-        graphicsContext.setFill(Color.GREEN);
-        graphicsContext.fillPolygon(new double[]{100, 150, 50}, new double[]{100, 150, 150}, 3);
-    }
-
-    public void canvasMousePosition(MouseEvent mouseEvent) {
+    public void canvasAction(MouseEvent mouseEvent) {
         Position mousePosition = new Position((int) mouseEvent.getX(), (int) mouseEvent.getY());
 
-        Shape shape = Shape.createShape(choiceBoxShape.getValue(),mousePosition,colorPicker.getValue(),sizeSlider.getValue());
-        shapeModel.add(shape);
-        shapeModel.renderShapes(graphicsContext);
+        if (mouseEvent.getButton().name().equals("PRIMARY")) {
+            Shape shape = Shape.createShape(shapeModel.getCurrentShapeType(), mousePosition, shapeModel.getCurrentColor(), shapeModel.getCurrentSize());
+            shapeModel.add(shape);
+            shapeModel.renderShapes(graphicsContext);
+        }
+
+
     }
 
-    public void setShape() {
-        this.shape = choiceBoxShape.getValue();
-    }
 
     public void saveFile() {
         Save.saveToJPG(canvas);
     }
 
     public void saveSVG() throws IOException {
-        Save.saveSVG(canvas,shapeModel);
-
+        Save.saveSVG(canvas, shapeModel);
     }
 
     public void sendMessage() {
         chatModel.sendMessage();
     }
-
-
-
 
 
 }
