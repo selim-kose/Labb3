@@ -49,7 +49,6 @@ public class Controller implements Initializable {
     @FXML
     private Canvas canvas = new Canvas();
     public GraphicsContext graphicsContext;
-    private ShapeType shape = ShapeType.CIRCLE;
     @FXML
     public Button buttonSend;
     @FXML
@@ -74,18 +73,24 @@ public class Controller implements Initializable {
 
     public void undo() {
         shapeModel.undo();
+        render();
+
+    }
+
+    public void render() {
         graphicsContext.clearRect(0, 0, canvas.getHeight(), canvas.getWidth());
         shapeModel.renderShapes(graphicsContext);
     }
 
     public void redo() {
         shapeModel.redo();
-        shapeModel.renderShapes(graphicsContext);
+        render();
     }
 
     public void clearCanvas() {
         shapeModel.getShapesList().clear();
-        graphicsContext.clearRect(0, 0, canvas.getHeight(), canvas.getWidth());
+        render();
+
     }
 
 
@@ -95,10 +100,14 @@ public class Controller implements Initializable {
         if (mouseEvent.getButton().name().equals("PRIMARY")) {
             Shape shape = Shape.createShape(shapeModel.getCurrentShapeType(), mousePosition, shapeModel.getCurrentColor(), shapeModel.getCurrentSize());
             shapeModel.add(shape);
+            render();
+        } else if (mouseEvent.getButton().name().equals("SECONDARY") && mouseEvent.isControlDown()) {
+            shapeModel.getShapesList().stream()
+                    .filter(shape -> shape.isInside(mouseEvent.getX(), mouseEvent.getY()))
+                    .findFirst().ifPresent(shape -> shape.setColor(shapeModel.getCurrentColor()));
             shapeModel.renderShapes(graphicsContext);
+
         }
-
-
     }
 
 

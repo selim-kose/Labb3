@@ -13,13 +13,13 @@ import se.selimkose.labb3.Model.Shape.ShapeType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShapeModel{
-   List<Shape> shapes = new ArrayList<>();
-   List<Shape> redoShapeList = new ArrayList<>();
-   ObservableList<ShapeType> shapeList = FXCollections.observableArrayList(ShapeType.values());
-   ObjectProperty<Color> currentColor = new SimpleObjectProperty<>(Color.RED);
-   DoubleProperty currentSize = new SimpleDoubleProperty(50);
-   ObjectProperty<ShapeType> currentShapeType = new SimpleObjectProperty(ShapeType.CIRCLE);
+public class ShapeModel {
+    List<Shape> shapes = new ArrayList<>();
+    List<Shape> redoShapeList = new ArrayList<>();
+    ObservableList<ShapeType> shapeList = FXCollections.observableArrayList(ShapeType.values());
+    ObjectProperty<Color> currentColor = new SimpleObjectProperty<>(Color.RED);
+    DoubleProperty currentSize = new SimpleDoubleProperty(50);
+    ObjectProperty<ShapeType> currentShapeType = new SimpleObjectProperty(ShapeType.CIRCLE);
 
     public ShapeType getCurrentShapeType() {
         return currentShapeType.get();
@@ -65,7 +65,7 @@ public class ShapeModel{
         this.currentColor.set(currentColor);
     }
 
-    public ShapeModel(){
+    public ShapeModel() {
 
     }
 
@@ -73,22 +73,23 @@ public class ShapeModel{
         shapes.add(shape);
     }
 
-    public List<Shape> getShapesList(){
+    public List<Shape> getShapesList() {
         return shapes;
     }
 
 
-    public void undo(){
-        if(shapes.isEmpty()){
+    public void undo() {
+        if (shapes.isEmpty()) {
             return;
         }
-        redoShapeList.add(shapes.get(shapes.size()-1));
-        shapes.remove(shapes.size()-1);
+        redoShapeList.add(shapes.get(shapes.size() - 1));
+        shapes.remove(shapes.size() - 1);
     }
 
-    public void redo(){
-        System.out.println(redoShapeList.get(redoShapeList.size()-1));
-        shapes.add(redoShapeList.get(redoShapeList.size()-1));
+    public void redo() {
+        shapes.add(redoShapeList.get(redoShapeList.size() - 1));
+        redoShapeList.remove(redoShapeList.size() - 1);
+
     }
 
 

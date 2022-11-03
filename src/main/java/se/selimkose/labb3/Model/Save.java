@@ -21,6 +21,9 @@ public class Save {
     public static void saveToJPG(Canvas canvas) {
         FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("jpg", "*.jpg");
         fileChooser.getExtensionFilters().add(extensionFilter);
+        FileChooser.ExtensionFilter extensionFilter1 = new FileChooser.ExtensionFilter("SVG", "*.SVG");
+        fileChooser.getExtensionFilters().add(extensionFilter1);
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home") + File.separator + "Desktop"));
         File filepath = fileChooser.showSaveDialog(new Stage());
         WritableImage image = canvas.snapshot(null, null);
 
