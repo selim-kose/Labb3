@@ -10,12 +10,15 @@ import se.selimkose.labb3.Model.Shape.Rectangle;
 import se.selimkose.labb3.Model.Shape.Shape;
 import se.selimkose.labb3.Model.Shape.ShapeType;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 
 public class ShapeModel {
-    List<Shape> shapes = new ArrayList<>();
-    List<Shape> redoShapeList = new ArrayList<>();
+    Deque<Shape> shapesList = new ArrayDeque<>();
+    Deque<Shape> redoShapeList = new ArrayDeque<>();
+
     ObservableList<ShapeType> shapeList = FXCollections.observableArrayList(ShapeType.values());
     ObjectProperty<Color> currentColor = new SimpleObjectProperty<>(Color.RED);
     DoubleProperty currentSize = new SimpleDoubleProperty(50);
@@ -70,31 +73,29 @@ public class ShapeModel {
     }
 
     public void add(Shape shape) {
-        shapes.add(shape);
+        shapesList.add(shape);
     }
 
-    public List<Shape> getShapesList() {
-        return shapes;
+    public Deque<Shape> getShapesList() {
+        return shapesList;
     }
 
 
     public void undo() {
-        if (shapes.isEmpty()) {
-            return;
+        if (!shapesList.isEmpty()) {
+            redoShapeList.add(shapesList.removeLast());
         }
-        redoShapeList.add(shapes.get(shapes.size() - 1));
-        shapes.remove(shapes.size() - 1);
     }
 
     public void redo() {
-        shapes.add(redoShapeList.get(redoShapeList.size() - 1));
-        redoShapeList.remove(redoShapeList.size() - 1);
-
+        if(!redoShapeList.isEmpty()){
+            shapesList.add(redoShapeList.removeLast());
+        }
     }
 
 
     public void renderShapes(GraphicsContext graphicsContext) {
-        for (Shape i : shapes) {
+        for (Shape i : shapesList) {
             graphicsContext.setFill(i.getColor());
             if (i instanceof Circle) {
                 graphicsContext.fillOval(i.getPosition().x() - (i.getSize() / 2), i.getPosition().y() - (i.getSize() / 2), i.getSize(), i.getSize());
