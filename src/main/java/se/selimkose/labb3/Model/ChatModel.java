@@ -5,17 +5,22 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.css.converter.ColorConverter;
+import javafx.scene.paint.Color;
+import se.selimkose.labb3.Model.Shape.Shape;
+import se.selimkose.labb3.Model.Shape.ShapeType;
 
 import java.io.*;
 import java.net.Socket;
 
 public class ChatModel {
 
+    ShapeModel shapeModel = new ShapeModel();
+
     StringProperty message = new SimpleStringProperty();
 
     //ArrayList that broadcasts messages to listeners when updated
     ObservableList<String> observableList = FXCollections.observableArrayList();
-
 
 
     private Socket socket;
@@ -38,12 +43,19 @@ public class ChatModel {
                     while (socket.isConnected()) {
                         String line = reader.readLine();
 
-                        //Runs on the javafx thread when the thread is not busy.
-                        // Without Platform.runLater program crashes because running javafx operations on different threads is snot allowed
-                        Platform.runLater(() -> observableList.add(line));
+                        if (line.startsWith("<")) {
+                            convertFromSvgToCanvas(line);
+
+                        } else {
+
+                            //Runs on the javafx thread when the thread is not busy.
+                            // Without Platform.runLater program crashes because running javafx operations on different threads is snot allowed
+                            Platform.runLater(() -> observableList.add(line));
+                        }
+
                     }
                 } catch (IOException e) {
-                    System.out.println ("Could not read incoming message");
+                    System.out.println("Could not read incoming message");
                     e.printStackTrace();
                 }
             });
@@ -56,6 +68,36 @@ public class ChatModel {
             e.printStackTrace();
         }
 
+    }
+
+    public void convertFromSvgToCanvas(String svgFormat) {
+        String[] words = svgFormat.split(" ");
+        int x = Integer.valueOf(words[1].substring(4, 6));
+        int y = Integer.valueOf(words[2].substring(4, 6));
+        double size = Double.valueOf(words[3].substring(3, 5));
+        String circle = words[0].substring(1);
+
+        System.out.println(circle +" "+x + " " + y + " " + size);
+
+
+        Position mousePosition = new Position(x, y);
+
+        switch (words[0].substring(1)) {
+            case "circle" -> {
+                Shape shape = Shape.createShape(ShapeType.CIRCLE, mousePosition, Color.RED, size);
+                shapeModel.add(shape);
+                for (Shape i : shapeModel.getShapesList()) {
+                    System.out.println(i);
+                    System.out.println("########");
+                }
+
+            }
+
+
+            //  Shape shape = Shape.createShape(shapeModel.getCurrentShapeType(), mousePosition, shapeModel.getCurrentColor(), shapeModel.getCurrentSize());
+
+
+        }
     }
 
     public String getMessage() {
@@ -77,13 +119,13 @@ public class ChatModel {
     public void setObservableList(ObservableList<String> observableList) {
         this.observableList = observableList;
     }
+
     public Socket getSocket() {
         return socket;
     }
 
     public void sendMessage() {
         try {
-
             //Writes messages that has been input from GUI
             //BufferedReader must have newLine and flush after each message
             writer.write(getMessage());

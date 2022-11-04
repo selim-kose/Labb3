@@ -4,6 +4,9 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import se.selimkose.labb3.Model.Position;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Rectangle extends Shape {
 
     private String type;
@@ -14,17 +17,60 @@ public class Rectangle extends Shape {
     }
 
 
-    public void draw(GraphicsContext graphicsContext){
+    //Method for drawing in canvas
+    @Override
+    public void drawCanvas(GraphicsContext graphicsContext) {
         graphicsContext.setFill(getColor());
-        graphicsContext.fillRect(getPosition().x(),getPosition().y(),getSize(),getSize());
+        graphicsContext.fillRect(getPosition().x() - (getSize() / 2), getPosition().y() - (getSize() / 2), getSize(), getSize());
 
+    }
+
+    @Override
+    public void drawSVG(FileWriter fileWriter) {
+        try {
+            fileWriter.append("<" + getType() + " x=\"" + getPosition().x() + "\" y=\"" + getPosition().y() + "\" width=\"" + getSize() + "\" height=\"" + getSize() + "\" fill=\"#" + convertColorToHex(getColor()) + "\"/>\n");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public String convertColorToHex(Color currentColor) {
+        String hexColor  = getColor().toString().substring(2, 8);
+        return hexColor;
+    }
+
+    @Override
+    public void convertFromSvgToCanvas(String svgFormat) {
+
+    }
+
+
+    //Method for collision detection.
+    @Override
+    public boolean isInside(double x, double y) {
+
+        double px = x;      // point position (move with mouse)
+        double py = y;
+
+        double sx = (getPosition().x() - (getSize() / 2));    // square position
+        double sy = (getPosition().y() - (getSize() / 2));
+        double sw = getSize();    // and dimensions
+        double sh = getSize();
+
+
+        if (px >= sx &&         // right of the left edge AND
+                px <= sx + sw &&    // left of the right edge AND
+                py >= sy &&         // below the top AND
+                py <= sy + sh) {    // above the bottom
+            return true;
+        }
+        return false;
     }
 
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
+
 }

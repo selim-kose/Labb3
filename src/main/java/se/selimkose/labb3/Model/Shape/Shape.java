@@ -1,10 +1,13 @@
 package se.selimkose.labb3.Model.Shape;
 
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import se.selimkose.labb3.Model.Position;
 import se.selimkose.labb3.Model.ShapeModel;
 
-public class Shape {
+import java.io.FileWriter;
+
+public abstract class Shape {
 
     private Position position;
     private Color color;
@@ -27,17 +30,16 @@ public class Shape {
         };
     }
 
-    public boolean isInside(double x, double y) {
-        double dx = x - getPosition().x();
-        double dy = y - getPosition().y();
+    public abstract boolean isInside(double x, double y);
 
-        double distanceFromCircleCenterSquared = dx * dx + dy * dy;
+    public abstract void drawCanvas(GraphicsContext graphicsContext);
 
-        return distanceFromCircleCenterSquared < getSize()*getSize();
-    }
+    public abstract void drawSVG(FileWriter fileWriter);
 
+    public abstract String convertColorToHex(Color currentColor);
 
-    //public boolean isInside(double x, double y);
+    public abstract void convertFromSvgToCanvas(String svgFormat);
+
 
     public Position getPosition() {
         return position;
@@ -59,5 +61,11 @@ public class Shape {
         return type;
     }
 
+    public void setSize(double size) {
+        this.size = size;
+    }
 
+    public void setType(String type) {
+        this.type = type;
+    }
 }

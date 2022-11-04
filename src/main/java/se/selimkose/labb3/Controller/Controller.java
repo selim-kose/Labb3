@@ -65,6 +65,8 @@ public class Controller implements Initializable {
         sizeSlider.valueProperty().bindBidirectional(shapeModel.currentSizeProperty());
 
 
+
+
         textFieldMessage.textProperty().bindBidirectional(chatModel.messageProperty());
         messageListView.setItems(chatModel.getObservableList());
         buttonSend.disableProperty().bind(chatModel.messageProperty().isEmpty());
@@ -100,19 +102,24 @@ public class Controller implements Initializable {
         if (mouseEvent.getButton().name().equals("PRIMARY")) {
             Shape shape = Shape.createShape(shapeModel.getCurrentShapeType(), mousePosition, shapeModel.getCurrentColor(), shapeModel.getCurrentSize());
             shapeModel.add(shape);
-            render();
-        } else if (mouseEvent.getButton().name().equals("SECONDARY") && mouseEvent.isControlDown()) {
+            for (Shape i: shapeModel.getShapesList()){
+                System.out.println(i);
+            }
+
+        } else if (mouseEvent.getButton().name().equals("SECONDARY")) {
             shapeModel.getShapesList().stream()
                     .filter(shape -> shape.isInside(mouseEvent.getX(), mouseEvent.getY()))
-                    .findFirst().ifPresent(shape -> shape.setColor(shapeModel.getCurrentColor()));
-            shapeModel.renderShapes(graphicsContext);
-
+                    .findFirst()
+                    .ifPresent(shape -> {
+                        shape.setColor(shapeModel.getCurrentColor());
+                        shape.setSize(shapeModel.getCurrentSize());
+                    });
         }
+        render();
     }
 
-
-    public void saveFile() {
-        Save.saveToJPG(canvas);
+    public void exit(){
+        System.exit(0);
     }
 
     public void saveSVG() throws IOException {
