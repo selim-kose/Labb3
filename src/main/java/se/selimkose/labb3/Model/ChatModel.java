@@ -86,6 +86,7 @@ public class ChatModel {
             case "circle" -> {
                 Shape shape = Shape.createShape(ShapeType.CIRCLE, mousePosition, Color.RED, size);
                 shapeModel.add(shape);
+
                 for (Shape i : shapeModel.getShapesList()) {
                     System.out.println(i);
                     System.out.println("########");

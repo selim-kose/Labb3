@@ -84,6 +84,8 @@ public class Controller implements Initializable {
         shapeModel.renderShapes(graphicsContext);
     }
 
+
+
     public void redo() {
         shapeModel.redo();
         render();

@@ -1,10 +1,11 @@
 .root {
-    -fx-background-color: linear-gradient(to bottom right, #ffffff, #989eab);
+    -fx-background-color: linear-gradient(to bottom right, #ffffff, #eaefea);
 
 }
 
 .button {
     -fx-hgap: 10;
+
 }
 
 .menu-bar {
@@ -18,8 +19,8 @@
 }
 
 .button:hover {
-    -fx-background-color: #6060a4;
-    -fx-text-fill: red;
+    -fx-background-color: #a5a5a8;
+    -fx-text-fill: white;
 
 }
 
