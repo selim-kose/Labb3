@@ -1,40 +1,21 @@
 package se.selimkose.labb3.Controller;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
+import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 
-import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
+import javafx.scene.paint.Color;
 import se.selimkose.labb3.Model.*;
 import se.selimkose.labb3.Model.Shape.*;
-import javafx.embed.swing.SwingFXUtils;
 
 
-import javax.imageio.ImageIO;
-
-
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Path;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
@@ -59,12 +40,16 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         graphicsContext = canvas.getGraphicsContext2D();
-        choiceBoxShape.getItems().addAll(shapeModel.getShapeList());
+        choiceBoxShape.getItems().addAll(shapeModel.getShapeTypeList());
         choiceBoxShape.valueProperty().bindBidirectional(shapeModel.currentShapeTypeProperty());
         colorPicker.valueProperty().bindBidirectional(shapeModel.currentColorProperty());
         sizeSlider.valueProperty().bindBidirectional(shapeModel.currentSizeProperty());
 
 
+        chatModel.getObservableShapeList().addListener((ListChangeListener.Change<?> change) -> {render();
+            for(Shape i: chatModel.getObservableShapeList()){
+                System.out.println(i);
+            };});
 
 
         textFieldMessage.textProperty().bindBidirectional(chatModel.messageProperty());
@@ -72,6 +57,7 @@ public class Controller implements Initializable {
         buttonSend.disableProperty().bind(chatModel.messageProperty().isEmpty());
 
     }
+
 
     public void undo() {
         shapeModel.undo();
@@ -82,8 +68,9 @@ public class Controller implements Initializable {
     public void render() {
         graphicsContext.clearRect(0, 0, canvas.getHeight(), canvas.getWidth());
         shapeModel.renderShapes(graphicsContext);
-    }
+        chatModel.renderShapes(graphicsContext);
 
+    }
 
 
     public void redo() {
@@ -93,6 +80,7 @@ public class Controller implements Initializable {
 
     public void clearCanvas() {
         shapeModel.getShapesList().clear();
+        chatModel.getObservableShapeList().clear();
         render();
 
     }
@@ -104,9 +92,6 @@ public class Controller implements Initializable {
         if (mouseEvent.getButton().name().equals("PRIMARY")) {
             Shape shape = Shape.createShape(shapeModel.getCurrentShapeType(), mousePosition, shapeModel.getCurrentColor(), shapeModel.getCurrentSize());
             shapeModel.add(shape);
-            for (Shape i: shapeModel.getShapesList()){
-                System.out.println(i);
-            }
 
         } else if (mouseEvent.getButton().name().equals("SECONDARY")) {
             shapeModel.getShapesList().stream()
@@ -116,11 +101,17 @@ public class Controller implements Initializable {
                         shape.setColor(shapeModel.getCurrentColor());
                         shape.setSize(shapeModel.getCurrentSize());
                     });
+        } else if (mouseEvent.getButton().name().equals("MIDDLE")) {
+            Shape shape = Shape.createShape(shapeModel.getCurrentShapeType(), mousePosition, shapeModel.getCurrentColor(), shapeModel.getCurrentSize());
+
+            chatModel.setMessage(shape.drawSVGSend());
+            System.out.println(shape.drawSVGSend());
+            sendMessage();
         }
         render();
     }
 
-    public void exit(){
+    public void exit() {
         System.exit(0);
     }
 

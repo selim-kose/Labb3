@@ -5,8 +5,9 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.css.converter.ColorConverter;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import se.selimkose.labb3.Controller.Controller;
 import se.selimkose.labb3.Model.Shape.Shape;
 import se.selimkose.labb3.Model.Shape.ShapeType;
 
@@ -15,12 +16,13 @@ import java.net.Socket;
 
 public class ChatModel {
 
-    ShapeModel shapeModel = new ShapeModel();
 
     StringProperty message = new SimpleStringProperty();
 
     //ArrayList that broadcasts messages to listeners when updated
     ObservableList<String> observableList = FXCollections.observableArrayList();
+
+    ObservableList<Shape> observableShapeList = FXCollections.observableArrayList();
 
 
     private Socket socket;
@@ -45,6 +47,8 @@ public class ChatModel {
 
                         if (line.startsWith("<")) {
                             convertFromSvgToCanvas(line);
+
+
 
                         } else {
 
@@ -72,33 +76,38 @@ public class ChatModel {
 
     public void convertFromSvgToCanvas(String svgFormat) {
         String[] words = svgFormat.split(" ");
-        int x = Integer.valueOf(words[1].substring(4, 6));
-        int y = Integer.valueOf(words[2].substring(4, 6));
-        double size = Double.valueOf(words[3].substring(3, 5));
+        int x = Integer.valueOf(words[1].replaceAll("[a-z=\"]",""));
+        int y = Integer.valueOf(words[2].replaceAll("[a-z=\"]",""));
+        double size = Double.valueOf(words[3].replaceAll("[a-z=\"]",""));
+
         String circle = words[0].substring(1);
-
-        System.out.println(circle +" "+x + " " + y + " " + size);
-
-
+        System.out.println(svgFormat);
         Position mousePosition = new Position(x, y);
 
         switch (words[0].substring(1)) {
-            case "circle" -> {
-                Shape shape = Shape.createShape(ShapeType.CIRCLE, mousePosition, Color.RED, size);
-                shapeModel.add(shape);
-
-                for (Shape i : shapeModel.getShapesList()) {
-                    System.out.println(i);
-                    System.out.println("########");
-                }
-
+            case "circle" -> {Shape shape1 = Shape.createShape(ShapeType.CIRCLE, mousePosition, Color.RED, size*2);
+                observableShapeList.add(shape1);}
+            case "rect" -> {
+                Shape shape2 = Shape.createShape(ShapeType.RECTANGLE, mousePosition, Color.RED, size);
+                observableShapeList.add(shape2);
             }
-
-
-            //  Shape shape = Shape.createShape(shapeModel.getCurrentShapeType(), mousePosition, shapeModel.getCurrentColor(), shapeModel.getCurrentSize());
-
-
         }
+    }
+
+
+
+    public void renderShapes(GraphicsContext graphicsContext) {
+        for(Shape i: observableShapeList){
+            i.drawCanvas(graphicsContext);
+        }
+    }
+
+    public ObservableList<Shape> getObservableShapeList() {
+        return observableShapeList;
+    }
+
+    public void setObservableShapeList(ObservableList<Shape> observableShapeList) {
+        this.observableShapeList = observableShapeList;
     }
 
     public String getMessage() {

@@ -15,7 +15,7 @@ import java.util.Deque;
 public class ShapeModel {
     Deque<Shape> shapesList = new ArrayDeque<>();
     Deque<Shape> redoShapeList = new ArrayDeque<>();
-    ObservableList<ShapeType> shapeList = FXCollections.observableArrayList(ShapeType.values());
+    ObservableList<ShapeType> shapeTypeList = FXCollections.observableArrayList(ShapeType.values());
     ObjectProperty<Color> currentColor = new SimpleObjectProperty<>(Color.RED);
     DoubleProperty currentSize = new SimpleDoubleProperty(50);
     ObjectProperty<ShapeType> currentShapeType = new SimpleObjectProperty<>(ShapeType.CIRCLE);
@@ -47,12 +47,12 @@ public class ShapeModel {
         this.currentSize.set(currentSize);
     }
 
-    public ObservableList<ShapeType> getShapeList() {
-        return shapeList;
+    public ObservableList<ShapeType> getShapeTypeList() {
+        return shapeTypeList;
     }
 
-    public void setShapeList(ObservableList<ShapeType> shapeList) {
-        this.shapeList = shapeList;
+    public void setShapeTypeList(ObservableList<ShapeType> shapeTypeList) {
+        this.shapeTypeList = shapeTypeList;
     }
 
     public Color getCurrentColor() {
@@ -95,10 +95,15 @@ public class ShapeModel {
     public void renderShapes(GraphicsContext graphicsContext) {
         for(Shape i: shapesList){
             i.drawCanvas(graphicsContext);
+
+            }
+
         }
+
+
     }
 
 
 
 
-}
+

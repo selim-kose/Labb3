@@ -21,6 +21,10 @@ public abstract class Shape {
         this.size = size;
     }
 
+    public String drawSVGSend(){
+        return "<" + getType() + "cx=\"" + getPosition().x() + "\" cy=\"" + getPosition().y() + "\" r=\"" + getSize() / 2 + "\" fill=\"#" + convertColorToHex(getColor()) + "\"/>";
+    }
+
     public static Shape createShape(ShapeType shapeType,Position position,Color color, double size){
 
         return switch (shapeType){
@@ -67,5 +71,15 @@ public abstract class Shape {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return "Shape{" +
+                "position=" + position +
+                ", color=" + color +
+                ", size=" + size +
+                ", type='" + type + '\'' +
+                '}';
     }
 }

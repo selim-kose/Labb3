@@ -10,10 +10,12 @@ import java.io.IOException;
 
 public class Circle extends Shape {
     private String type;
+    private String svg;
 
     public Circle(Position position, Color color, double size) {
         super(position, color, size);
         this.type = "circle ";
+        this.svg = drawSVGSend();
     }
 
 
@@ -34,6 +36,13 @@ public class Circle extends Shape {
     }
 
     @Override
+    public String drawSVGSend(){
+        return "<" + getType() + "cx=\"" + getPosition().x() + "\" cy=\"" + getPosition().y() + "\" r=\"" + getSize() / 2 + "\" fill=\"#" + convertColorToHex(getColor()) + "\"/>";
+    }
+
+
+
+    @Override
     public String convertColorToHex(Color currentColor) {
         String hexColor = getColor().toString().substring(2, 8);
         return hexColor;
@@ -41,9 +50,24 @@ public class Circle extends Shape {
 
     @Override
     public void convertFromSvgToCanvas(String svgFormat) {
-       String[] words = svgFormat.split(" ");
-       words[0].substring(1);
+        String[] words = svgFormat.split(" ");
+        int x = Integer.valueOf(words[1].substring(4, 6));
+        int y = Integer.valueOf(words[2].substring(4, 6));
+        double size = Double.valueOf(words[3].substring(3, 5));
+        String circle = words[0].substring(1);
 
+        Shape shape = Shape.createShape(ShapeType.CIRCLE, new Position(x,y), Color.RED, size);
+    }
+
+
+    public void convertFromSvgToCanvas() {
+        String[] words = this.svg.split(" ");
+        int x = Integer.valueOf(words[1].substring(4, 6));
+        int y = Integer.valueOf(words[2].substring(4, 6));
+        double size = Double.valueOf(words[3].substring(3, 5));
+        String circle = words[0].substring(1);
+
+        Shape shape = Shape.createShape(ShapeType.CIRCLE, new Position(x,y), Color.RED, size);
 
     }
 
@@ -63,5 +87,10 @@ public class Circle extends Shape {
         return type;
     }
 
-
+    @Override
+    public String toString() {
+        return "Circle{" +
+                "type=" + type +" "+ this.getPosition().x()+" "+this.getPosition().y() +" " +this.getSize()+ " "+ this.getColor()+
+                '}';
+    }
 }
