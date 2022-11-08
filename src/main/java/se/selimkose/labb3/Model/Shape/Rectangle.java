@@ -35,7 +35,7 @@ public class Rectangle extends Shape {
     @Override
     public void drawSVG(FileWriter fileWriter) {
         try {
-            fileWriter.append("<" + getType() + " x=\"" + getPosition().x() + "\" y=\"" + getPosition().y() + "\" width=\"" + getSize() + "\" height=\"" + getSize() + "\" fill=\"#" + convertColorToHex(getColor()) + "\"/>\n");
+            fileWriter.append("<" + getType() + " x=\"" + (getPosition().x() - (getSize()/2))+ "\" y=\"" + (getPosition().y() -getSize() /2 ) + "\" width=\"" + getSize() + "\" height=\"" + getSize() + "\" fill=\"#" + convertColorToHex(getColor()) + "\"/>\n");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -48,8 +48,11 @@ public class Controller implements Initializable {
 
         chatModel.getObservableShapeList().addListener((ListChangeListener.Change<?> change) -> {render();
             for(Shape i: chatModel.getObservableShapeList()){
-                System.out.println(i);
-            };});
+                System.out.println(i + " obs");
+            }
+            for(Shape j: shapeModel.getShapesList())
+                System.out.println(j + "standard");
+            });
 
 
         textFieldMessage.textProperty().bindBidirectional(chatModel.messageProperty());
@@ -103,9 +106,7 @@ public class Controller implements Initializable {
                     });
         } else if (mouseEvent.getButton().name().equals("MIDDLE")) {
             Shape shape = Shape.createShape(shapeModel.getCurrentShapeType(), mousePosition, shapeModel.getCurrentColor(), shapeModel.getCurrentSize());
-
             chatModel.setMessage(shape.drawSVGSend());
-            System.out.println(shape.drawSVGSend());
             sendMessage();
         }
         render();

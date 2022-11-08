@@ -40,9 +40,9 @@
               </HBox>
          </children>
       </VBox>
-        <Pane id="canvasPane" prefHeight="668.0" prefWidth="609.0">
+        <Pane id="canvasPane" prefHeight="720.0" prefWidth="609.0">
             <children>
-                <Canvas id="canvas" fx:id="canvas" height="720.0" onMouseClicked="#canvasAction" width="616.0" />
+                <Canvas id="canvas" fx:id="canvas" height="720.0" onMouseClicked="#canvasAction" width="609.0" />
             </children>
         </Pane>
         <AnchorPane id="chatPane" prefHeight="720.0" prefWidth="590.0">

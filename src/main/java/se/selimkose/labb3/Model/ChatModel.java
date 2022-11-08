@@ -45,14 +45,13 @@ public class ChatModel {
                 try {
                     while (socket.isConnected()) {
                         String line = reader.readLine();
+                        System.out.println(line);
 
-                        if (line.startsWith("<")) {
+                        String[] lines = line.split(" ");
+
+                        if (!lines[0].equals("[you]") && lines[1].startsWith("<")) {
                             convertFromSvgToCanvas(line);
-
-
-
                         } else {
-
                             //Runs on the javafx thread when the thread is not busy.
                             // Without Platform.runLater program crashes because running javafx operations on different threads is snot allowed
                             Platform.runLater(() -> observableList.add(line));
@@ -76,18 +75,22 @@ public class ChatModel {
     }
 
     public void convertFromSvgToCanvas(String svgFormat) {
+
         String[] words = svgFormat.split(" ");
-        String svgType = words[0].substring(1);
-        int x = Integer.valueOf(words[1].replaceAll("[a-z=\"]",""));
-        int y = Integer.valueOf(words[2].replaceAll("[a-z=\"]",""));
-        double size = Double.valueOf(words[3].replaceAll("[a-z=\"]",""));
+        String svgType = words[1].substring(1);
+        int x = Integer.valueOf(words[2].replaceAll("[a-z=\"]",""));
+        int y = Integer.valueOf(words[3].replaceAll("[a-z=\"]",""));
+        double size = Double.valueOf(words[4].replaceAll("[a-z=\"]",""));
         String colorHex = svgFormat.replaceAll(".*[^A-Fa-f0-9]{6}","").substring(0,6);
         Color color = Color.web(colorHex);
+        System.out.println(words[0]+ svgType+ " "+ x+ " " + y+ " "+ size + " " + colorHex);
+
 
         Position mousePosition = new Position(x, y);
 
         switch (svgType) {
-            case "circle" -> {Shape shape1 = Shape.createShape(ShapeType.CIRCLE, mousePosition, color, size*2);
+            case "circle" -> {
+                Shape shape1 = Shape.createShape(ShapeType.CIRCLE, mousePosition, color, size*2);
                 observableShapeList.add(shape1);}
             case "rect" -> {
                 Shape shape2 = Shape.createShape(ShapeType.RECTANGLE, mousePosition, color, size);
