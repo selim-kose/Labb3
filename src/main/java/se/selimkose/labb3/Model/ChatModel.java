@@ -25,6 +25,7 @@ public class ChatModel {
     ObservableList<Shape> observableShapeList = FXCollections.observableArrayList();
 
 
+
     private Socket socket;
     private BufferedWriter writer;
     private BufferedReader reader;
@@ -76,25 +77,24 @@ public class ChatModel {
 
     public void convertFromSvgToCanvas(String svgFormat) {
         String[] words = svgFormat.split(" ");
+        String svgType = words[0].substring(1);
         int x = Integer.valueOf(words[1].replaceAll("[a-z=\"]",""));
         int y = Integer.valueOf(words[2].replaceAll("[a-z=\"]",""));
         double size = Double.valueOf(words[3].replaceAll("[a-z=\"]",""));
+        String colorHex = svgFormat.replaceAll(".*[^A-Fa-f0-9]{6}","").substring(0,6);
+        Color color = Color.web(colorHex);
 
-        String circle = words[0].substring(1);
-        System.out.println(svgFormat);
         Position mousePosition = new Position(x, y);
 
-        switch (words[0].substring(1)) {
-            case "circle" -> {Shape shape1 = Shape.createShape(ShapeType.CIRCLE, mousePosition, Color.RED, size*2);
+        switch (svgType) {
+            case "circle" -> {Shape shape1 = Shape.createShape(ShapeType.CIRCLE, mousePosition, color, size*2);
                 observableShapeList.add(shape1);}
             case "rect" -> {
-                Shape shape2 = Shape.createShape(ShapeType.RECTANGLE, mousePosition, Color.RED, size);
+                Shape shape2 = Shape.createShape(ShapeType.RECTANGLE, mousePosition, color, size);
                 observableShapeList.add(shape2);
             }
         }
     }
-
-
 
     public void renderShapes(GraphicsContext graphicsContext) {
         for(Shape i: observableShapeList){

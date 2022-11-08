@@ -53,10 +53,7 @@
 
                 </ListView>
                 <Label layoutX="163.0" layoutY="25.0" prefHeight="17.0" prefWidth="228.0" text="Chat">
-
                 </Label>
-            <Button fx:id="buttonSend1" layoutX="452.0" layoutY="640.0" onAction="#sendMessage" prefHeight="25.0" prefWidth="55.0" text="Send Shape" />
-
             </children>
         </AnchorPane>
     </children>
