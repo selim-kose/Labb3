@@ -37,6 +37,10 @@ public class Controller implements Initializable {
     @FXML
     public ListView<String> messageListView;
 
+    ScrollPane scrollPane = new ScrollPane();
+
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         graphicsContext = canvas.getGraphicsContext2D();
@@ -44,6 +48,10 @@ public class Controller implements Initializable {
         choiceBoxShape.valueProperty().bindBidirectional(shapeModel.currentShapeTypeProperty());
         colorPicker.valueProperty().bindBidirectional(shapeModel.currentColorProperty());
         sizeSlider.valueProperty().bindBidirectional(shapeModel.currentSizeProperty());
+
+
+       // scrollPane.setContent(new Label(chatModel.getMessage()));
+
 
 
         chatModel.getObservableShapeList().addListener((ListChangeListener.Change<?> change) -> {render();
@@ -58,6 +66,7 @@ public class Controller implements Initializable {
         textFieldMessage.textProperty().bindBidirectional(chatModel.messageProperty());
         messageListView.setItems(chatModel.getObservableList());
         buttonSend.disableProperty().bind(chatModel.messageProperty().isEmpty());
+
 
     }
 

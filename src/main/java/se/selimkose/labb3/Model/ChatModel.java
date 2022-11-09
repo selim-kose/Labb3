@@ -48,6 +48,7 @@ public class ChatModel {
                         System.out.println(line);
 
                         String[] lines = line.split(" ");
+                        //
 
                         if (!lines[0].equals("[you]") && lines[1].startsWith("<")) {
                             convertFromSvgToCanvas(line);

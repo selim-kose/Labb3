@@ -7,8 +7,52 @@
     -fx-hgap: 10;
     -fx-border-style: none;
     -fx-border-radius: 80;
+    -fx-background-color: #3867fc;
+    -fx-background-radius: 80;
+    -fx-font-size: 14;
+    -fx-text-fill: white;
+
+}
+.button:hover {
+    -fx-background-color: rgb(9, 78, 220);
+    -fx-text-fill: white;
+}
 
 
+.button:pressed{
+    -fx-background-color: #032f81;
+}
+.choice-box {
+    -fx-background-color:#3867fc;
+    -fx-background-radius: 80;
+
+
+}
+.choice-box .label {
+    -fx-text-fill: white;
+    -fx-background-color: #3867fc;
+    -fx-background-radius: 80;
+
+}
+
+.choice-box:hover {
+    -fx-background-color:rgb(9, 78, 220);
+    /*-fx-text-fill: white;*/
+}
+
+.color-picker  {
+    -fx-background-color: #3867fc;
+    -fx-text-fill: white;
+    -fx-fill: blue;
+    -fx-background-radius: 80;
+}
+
+.color-picker .label {
+    -fx-text-fill: white;
+}
+.color-picker:hover {
+    -fx-background-color: rgb(9, 78, 220);
+    -fx-text-fill: white;
 }
 
 .menu-bar {
@@ -16,25 +60,23 @@
 }
 
 #hbox {
-    -fx-border-color: black;
+
     -fx-background-color: rgba(13, 80, 224, 0.62);
 
 }
 
-.button:hover {
-    -fx-background-color: rgba(13, 80, 224, 0.62);
-    -fx-text-fill: white;
 
-
+#listView{
+    -fx-background-color: blue;
 }
 
 
 #borderPane {
-    -fx-border-color: black;
+
 }
 
 #chatPane {
-    -fx-border-color: black;
+
 
 
 }
