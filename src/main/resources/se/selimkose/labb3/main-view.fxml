@@ -15,7 +15,7 @@
                       <Menu mnemonicParsing="false" text="File">
                           <items>
                               <MenuItem mnemonicParsing="false" onAction="#exit" text="Close" />
-                        <MenuItem mnemonicParsing="false" onAction="#saveSVG" text="Save as..." />
+                        <MenuItem mnemonicParsing="false" onAction="#save" text="Save as..." />
                           </items>
                       </Menu>
                       <Menu mnemonicParsing="false" text="Edit">
@@ -89,14 +89,18 @@
                       <ListView id="listView" fx:id="messageListView" layoutX="64.0" layoutY="75.0" prefHeight="464.0" prefWidth="476.0">
 
                 </ListView>
-                  <Label fx:id="chatLabel" layoutX="295.0" layoutY="27.0" prefHeight="17.0" prefWidth="80.0" text="Label">
+                  <Label fx:id="chatLabel" layoutX="295.0" layoutY="27.0" prefHeight="20.0" prefWidth="46.0" text="Label">
                      <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font size="14.0" />
                      </font></Label>
                       <Label layoutX="259.0" layoutY="27.0" prefHeight="17.0" prefWidth="36.0" text="Chat" textAlignment="CENTER">
                      <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font size="14.0" />
                      </font></Label>
+                  <ImageView fitHeight="20.0" fitWidth="17.0" layoutX="344.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/icons/wifi%20(1).png" />
+                     </image></ImageView>
                   </children>
               </AnchorPane>
          </children>

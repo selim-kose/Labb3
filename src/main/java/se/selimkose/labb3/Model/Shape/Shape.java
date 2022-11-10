@@ -42,7 +42,6 @@ public abstract class Shape {
 
     public abstract String convertColorToHex(Color currentColor);
 
-    public abstract void convertFromSvgToCanvas(String svgFormat);
 
 
     public Position getPosition() {

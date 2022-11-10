@@ -13,44 +13,42 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Save {
-   static FileChooser fileChooser = new FileChooser();
+    static FileChooser fileChooser = new FileChooser();
 
-    public static void saveSVG(Canvas canvas,ShapeModel shapeModel) throws IOException {
+    public static void save(Canvas canvas, ShapeModel shapeModel) throws IOException {
         FileWriter fileWriter;
-        if(fileChooser.getExtensionFilters().isEmpty()){
-            FileChooser.ExtensionFilter extensionFilterJPG = new FileChooser.ExtensionFilter("jpg", "*.jpg");
-            FileChooser.ExtensionFilter extensionFilterSVG = new FileChooser.ExtensionFilter("SVG", "*.SVG");
+        if (fileChooser.getExtensionFilters().isEmpty()) {
             fileChooser.setInitialDirectory(new File(System.getProperty("user.home") + File.separator + "Desktop"));
-            fileChooser.getExtensionFilters().addAll(extensionFilterJPG,extensionFilterSVG);
+            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("SVG", "*.SVG"), new FileChooser.ExtensionFilter("jpg", "*.jpg"));
         }
         File filepath = fileChooser.showSaveDialog(new Stage());
-        try {
-            fileWriter = new FileWriter(filepath);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        fileWriter = new FileWriter(filepath);
+        if (filepath.getName().endsWith(".jpg")) {
+            saveJpg(filepath, canvas);
+        } else {
+            saveSvg(filepath, fileWriter, canvas, shapeModel);
         }
+    }
 
-        if(filepath.getName().endsWith(".jpg")){
-            if (filepath != null) {
-                try {
-                    WritableImage image = canvas.snapshot(null, null);
-                    //https://mvnrepository.com/artifact/org.openjfx/javafx-swing/11-ea+24
-                    ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", filepath);
-                } catch (IOException e) {
-                    // TODO: handle exception here
-                }
+    public static void saveSvg(File filepath, FileWriter fileWriter, Canvas canvas, ShapeModel shapeModel) throws IOException {
+        if (filepath != null) {
+            fileWriter.write("<?xml version=\"1.0\" standalone=\"no\"?>\n" + "<svg width=\""
+                    + canvas.getWidth() + "\" height=\"" + canvas.getHeight() + "\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                    "\n");
+            for (Shape shape : shapeModel.shapesList) {
+                shape.drawSVG(fileWriter);
             }
-        }else {
-            if (filepath != null) {
-                fileWriter.write("<?xml version=\"1.0\" standalone=\"no\"?>\n" +
-                        "<svg width=\"" + canvas.getWidth() + "\" height=\"" + canvas.getHeight() + "\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
-                        "\n");
-                for (Shape shape: shapeModel.shapesList){
-                    shape.drawSVG(fileWriter);
-                }
-                fileWriter.append("</svg>");
-                fileWriter.close();
-            }
+            fileWriter.append("</svg>");
+            fileWriter.close();
+        }
+    }
+
+    public static void saveJpg(File filepath, Canvas canvas) throws IOException {
+        if (filepath != null) {
+            WritableImage image = canvas.snapshot(null, null);
+            //https://mvnrepository.com/artifact/org.openjfx/javafx-swing/11-ea+24
+            ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", filepath);
         }
     }
 }
+

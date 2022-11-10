@@ -3,19 +3,14 @@ package se.selimkose.labb3.Controller;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 import se.selimkose.labb3.Model.*;
 import se.selimkose.labb3.Model.Shape.*;
 import se.selimkose.labb3.Model.Shape.Shape;
@@ -107,8 +102,8 @@ public class Controller implements Initializable {
         System.exit(0);
     }
 
-    public void saveSVG() throws IOException {
-        Save.saveSVG(canvas, shapeModel);
+    public void save() throws IOException {
+        Save.save(canvas, shapeModel);
     }
     public void sendMessage() {
         chatModel.sendMessage();

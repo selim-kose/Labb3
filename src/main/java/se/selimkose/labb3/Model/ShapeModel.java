@@ -22,17 +22,12 @@ public class ShapeModel {
 
 
 
-
     public ShapeType getCurrentShapeType() {
         return currentShapeType.get();
     }
 
     public ObjectProperty<ShapeType> currentShapeTypeProperty() {
         return currentShapeType;
-    }
-
-    public void setCurrentShapeType(ShapeType currentShapeType) {
-        this.currentShapeType.set(currentShapeType);
     }
 
     public double getCurrentSize() {
@@ -43,16 +38,8 @@ public class ShapeModel {
         return currentSize;
     }
 
-    public void setCurrentSize(double currentSize) {
-        this.currentSize.set(currentSize);
-    }
-
     public ObservableList<ShapeType> getShapeTypeList() {
         return shapeTypeList;
-    }
-
-    public void setShapeTypeList(ObservableList<ShapeType> shapeTypeList) {
-        this.shapeTypeList = shapeTypeList;
     }
 
     public Color getCurrentColor() {
@@ -63,22 +50,15 @@ public class ShapeModel {
         return currentColor;
     }
 
-    public void setCurrentColor(Color currentColor) {
-        this.currentColor.set(currentColor);
-    }
-
     public ShapeModel() {
 
     }
-
-    public void add(Shape shape) {
-        shapesList.add(shape);
-    }
-
     public Deque<Shape> getShapesList() {
         return shapesList;
     }
-
+    public void add(Shape shape) {
+        shapesList.add(shape);
+    }
 
     public void undo() {
         if (!shapesList.isEmpty()) {

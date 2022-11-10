@@ -45,27 +45,10 @@ public class Rectangle extends Shape {
         return hexColor;
     }
 
-    @Override
-    public void convertFromSvgToCanvas(String svgFormat) {
-
-    }
-
-    public void convertFromSvgToCanvas() {
-        String[] words = this.svg.split(" ");
-        int x = Integer.valueOf(words[1].substring(4, 6));
-        int y = Integer.valueOf(words[2].substring(4, 6));
-        double size = Double.valueOf(words[3].substring(3, 5));
-        String circle = words[0].substring(1);
-
-        Shape shape = Shape.createShape(ShapeType.CIRCLE, new Position(x,y), Color.RED, size);
-
-    }
-
 
     //Method for collision detection.
     @Override
     public boolean isInside(double x, double y) {
-
         double px = x;      // point position (move with mouse)
         double py = y;
 
@@ -73,7 +56,6 @@ public class Rectangle extends Shape {
         double sy = (getPosition().y() - (getSize() / 2));
         double sw = getSize();    // and dimensions
         double sh = getSize();
-
 
         if (px >= sx &&         // right of the left edge AND
                 px <= sx + sw &&    // left of the right edge AND

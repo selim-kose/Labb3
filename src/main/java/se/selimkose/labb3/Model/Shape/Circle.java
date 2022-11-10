@@ -39,34 +39,10 @@ public class Circle extends Shape {
         return "<" + getType() + "cx=\"" + getPosition().x() + "\" cy=\"" + getPosition().y() + "\" r=\"" + getSize() / 2 + "\" fill=\"#" + convertColorToHex(getColor()) + "\"/>";
     }
 
-
     @Override
     public String convertColorToHex(Color currentColor) {
         String hexColor = getColor().toString().substring(2, 8);
         return hexColor;
-    }
-
-    @Override
-    public void convertFromSvgToCanvas(String svgFormat) {
-        String[] words = svgFormat.split(" ");
-        int x = Integer.parseInt(words[1].substring(4, 6));
-        int y = Integer.parseInt(words[2].substring(4, 6));
-        double size = Double.parseDouble(words[3].substring(3, 5));
-        String circle = words[0].substring(1);
-
-        Shape shape = Shape.createShape(ShapeType.CIRCLE, new Position(x,y), Color.RED, size);
-    }
-
-
-    public void convertFromSvgToCanvas() {
-        String[] words = this.svg.split(" ");
-        int x = Integer.parseInt(words[1].substring(4, 6));
-        int y = Integer.parseInt(words[2].substring(4, 6));
-        double size = Double.parseDouble(words[3].substring(3, 5));
-        String circle = words[0].substring(1);
-
-        Shape shape = Shape.createShape(ShapeType.CIRCLE, new Position(x,y), Color.RED, size);
-
     }
 
 
