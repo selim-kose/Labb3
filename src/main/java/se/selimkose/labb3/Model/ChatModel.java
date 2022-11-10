@@ -45,11 +45,8 @@ public class ChatModel {
                 try {
                     while (socket.isConnected()) {
                         String line = reader.readLine();
-                        System.out.println(line);
 
                         String[] lines = line.split(" ");
-                        //
-
                         if (!lines[0].equals("[you]") && lines[1].startsWith("<")) {
                             convertFromSvgToCanvas(line);
                         } else {
@@ -109,11 +106,6 @@ public class ChatModel {
     public ObservableList<Shape> getObservableShapeList() {
         return observableShapeList;
     }
-
-    public void setObservableShapeList(ObservableList<Shape> observableShapeList) {
-        this.observableShapeList = observableShapeList;
-    }
-
     public String getMessage() {
         return message.get();
     }
@@ -128,10 +120,6 @@ public class ChatModel {
 
     public ObservableList<String> getObservableList() {
         return observableList;
-    }
-
-    public void setObservableList(ObservableList<String> observableList) {
-        this.observableList = observableList;
     }
 
     public Socket getSocket() {

@@ -2,16 +2,27 @@
     -fx-background-color: linear-gradient(to bottom right, #ffffff,rgba(13, 80, 224, 0.62));
 
 }
+.list-cell {
+    -fx-cell-size: 40 ;
+    /*-fx-padding: 5px;*/
+    -fx-background-radius: 80;
+    -fx-font-size: 14px;
+    -fx-background-color: white;
+    -fx-font-family: "Times New Roman";
+}
+
+
+
 
 .button {
     -fx-hgap: 10;
     -fx-border-style: none;
     -fx-border-radius: 80;
-    -fx-background-color: #3867fc;
+    -fx-background-color: rgb(238, 238, 255);
     -fx-background-radius: 80;
     -fx-font-size: 14;
-    -fx-text-fill: white;
-
+    -fx-text-fill: #000000;
+    /*-fx-effect: dropshadow(three-pass-box, rgb(5, 16, 152),2,1.0,0.5,0.5);*/
 }
 .button:hover {
     -fx-background-color: rgb(9, 78, 220);
@@ -20,65 +31,60 @@
 
 
 .button:pressed{
-    -fx-background-color: #032f81;
+    -fx-background-color: #eae4e4; /*032f81*/
 }
 .choice-box {
-    -fx-background-color:#3867fc;
+    -fx-background-color:rgb(238, 238, 255);
     -fx-background-radius: 80;
-
 
 }
 .choice-box .label {
-    -fx-text-fill: white;
-    -fx-background-color: #3867fc;
+    -fx-text-fill: black;
     -fx-background-radius: 80;
 
 }
+.choice-box .label:hover {
+    -fx-text-fill: white;
+    -fx-background-radius: 80;
+}
 
 .choice-box:hover {
-    -fx-background-color:rgb(9, 78, 220);
-    /*-fx-text-fill: white;*/
+    -fx-background-color: rgb(9, 78, 220);
+    -fx-text-fill: white;
 }
 
 .color-picker  {
-    -fx-background-color: #3867fc;
-    -fx-text-fill: white;
+    -fx-background-color: rgb(238, 238, 255);
+    -fx-text-fill: black;
     -fx-fill: blue;
     -fx-background-radius: 80;
 }
 
 .color-picker .label {
+    -fx-text-fill: black;
+}
+
+.color-picker .label:hover {
     -fx-text-fill: white;
 }
+
 .color-picker:hover {
     -fx-background-color: rgb(9, 78, 220);
     -fx-text-fill: white;
 }
 
 .menu-bar {
- /* -fx-background-color: rgb(243, 243, 243);*/
 }
 
 #hbox {
-
     -fx-background-color: rgba(13, 80, 224, 0.62);
-
-}
-
-
-#listView{
-    -fx-background-color: blue;
 }
 
 
 #borderPane {
-
 }
 
 #chatPane {
-
-
-
 }
 #canvasPane {
     -fx-background-color: White;
