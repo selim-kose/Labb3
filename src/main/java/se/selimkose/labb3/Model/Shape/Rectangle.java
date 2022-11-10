@@ -18,14 +18,12 @@ public class Rectangle extends Shape {
         this.svg = drawSVGSend();
     }
 
-
     //Method for drawing in canvas
     @Override
     public void drawCanvas(GraphicsContext graphicsContext) {
         graphicsContext.setFill(getColor());
         graphicsContext.fillRect(getPosition().x() - (getSize() / 2), getPosition().y() - (getSize() / 2), getSize(), getSize());
     }
-
 
     @Override
     public String drawSVGSend(){
@@ -62,7 +60,6 @@ public class Rectangle extends Shape {
         Shape shape = Shape.createShape(ShapeType.CIRCLE, new Position(x,y), Color.RED, size);
 
     }
-
 
 
     //Method for collision detection.

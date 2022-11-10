@@ -3,15 +3,12 @@
 
 }
 .list-cell {
-    -fx-cell-size: 40 ;
+    -fx-cell-size: 30 ;
     /*-fx-padding: 5px;*/
-    -fx-background-radius: 80;
     -fx-font-size: 14px;
     -fx-background-color: white;
-    -fx-font-family: "Times New Roman";
+    -fx-font-family: "Calibri";
 }
-
-
 
 
 .button {
@@ -73,19 +70,11 @@
     -fx-text-fill: white;
 }
 
-.menu-bar {
-}
 
 #hbox {
     -fx-background-color: rgba(13, 80, 224, 0.62);
 }
 
-
-#borderPane {
-}
-
-#chatPane {
-}
 #canvasPane {
     -fx-background-color: White;
 }

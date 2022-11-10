@@ -18,7 +18,6 @@ public class Circle extends Shape {
         this.svg = drawSVGSend();
     }
 
-
     //Method for drawing in canvas
     @Override
     public void drawCanvas(GraphicsContext graphicsContext) {
@@ -41,7 +40,6 @@ public class Circle extends Shape {
     }
 
 
-
     @Override
     public String convertColorToHex(Color currentColor) {
         String hexColor = getColor().toString().substring(2, 8);
@@ -51,9 +49,9 @@ public class Circle extends Shape {
     @Override
     public void convertFromSvgToCanvas(String svgFormat) {
         String[] words = svgFormat.split(" ");
-        int x = Integer.valueOf(words[1].substring(4, 6));
-        int y = Integer.valueOf(words[2].substring(4, 6));
-        double size = Double.valueOf(words[3].substring(3, 5));
+        int x = Integer.parseInt(words[1].substring(4, 6));
+        int y = Integer.parseInt(words[2].substring(4, 6));
+        double size = Double.parseDouble(words[3].substring(3, 5));
         String circle = words[0].substring(1);
 
         Shape shape = Shape.createShape(ShapeType.CIRCLE, new Position(x,y), Color.RED, size);
@@ -62,9 +60,9 @@ public class Circle extends Shape {
 
     public void convertFromSvgToCanvas() {
         String[] words = this.svg.split(" ");
-        int x = Integer.valueOf(words[1].substring(4, 6));
-        int y = Integer.valueOf(words[2].substring(4, 6));
-        double size = Double.valueOf(words[3].substring(3, 5));
+        int x = Integer.parseInt(words[1].substring(4, 6));
+        int y = Integer.parseInt(words[2].substring(4, 6));
+        double size = Double.parseDouble(words[3].substring(3, 5));
         String circle = words[0].substring(1);
 
         Shape shape = Shape.createShape(ShapeType.CIRCLE, new Position(x,y), Color.RED, size);

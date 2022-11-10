@@ -42,7 +42,8 @@ public class Controller implements Initializable {
     public TextField textFieldMessage;
     @FXML
     public ListView<String> messageListView;
-    public ScrollPane sp;
+
+    public Label chatLabel;
 
 
     @Override
@@ -53,45 +54,13 @@ public class Controller implements Initializable {
         colorPicker.valueProperty().bindBidirectional(shapeModel.currentColorProperty());
         sizeSlider.valueProperty().bindBidirectional(shapeModel.currentSizeProperty());
 
-
-        chatModel.getObservableShapeList().addListener((ListChangeListener.Change<?> change) -> {render();
-        });
-
-
-
+        chatLabel.textProperty().bind(chatModel.onlineStatusProperty());
+        chatModel.getObservableShapeList().addListener((ListChangeListener.Change<?> change) -> render());
 
         textFieldMessage.textProperty().bindBidirectional(chatModel.messageProperty());
         messageListView.setItems(chatModel.getObservableList());
         buttonSend.disableProperty().bind(chatModel.messageProperty().isEmpty());
-
     }
-
-
-
-    public void undo() {
-        shapeModel.undo();
-        render();
-    }
-
-    public void render() {
-        graphicsContext.clearRect(0, 0, 610, 620);
-        shapeModel.renderShapes(graphicsContext);
-        chatModel.renderShapes(graphicsContext);
-
-    }
-
-
-    public void redo() {
-        shapeModel.redo();
-        render();
-    }
-
-    public void clearCanvas() {
-        shapeModel.getShapesList().clear();
-        chatModel.getObservableShapeList().clear();
-        render();
-    }
-
 
     public void canvasAction(MouseEvent mouseEvent) {
         Position mousePosition = new Position((int) mouseEvent.getX(), (int) mouseEvent.getY());
@@ -116,6 +85,24 @@ public class Controller implements Initializable {
         render();
     }
 
+    public void undo() {
+        shapeModel.undo();
+        render();
+    }
+    public void render() {
+        graphicsContext.clearRect(0, 0, 610, 620);
+        shapeModel.renderShapes(graphicsContext);
+        chatModel.renderShapes(graphicsContext);
+    }
+    public void redo() {
+        shapeModel.redo();
+        render();
+    }
+    public void clearCanvas() {
+        shapeModel.getShapesList().clear();
+        chatModel.getObservableShapeList().clear();
+        render();
+    }
     public void exit() {
         System.exit(0);
     }
@@ -123,27 +110,10 @@ public class Controller implements Initializable {
     public void saveSVG() throws IOException {
         Save.saveSVG(canvas, shapeModel);
     }
-
     public void sendMessage() {
         chatModel.sendMessage();
 
     }
-    public void addMessage(){
-        Text text = new Text(chatModel.messageProperty().getValue());
-        if (text.getText().startsWith(">"))
-            return;
-
-        TextFlow textFlow = new TextFlow(text);
-        textFlow.setStyle( "-fx-background-color: rgb(4,4,248);" +
-                "-fx-background-radius: 20px;" + "-fx-text-fill: white;");
-        textFlow.setPadding(new Insets(5, 10, 5, 10));
-
-            messageListView.getItems().add("textFlow");
-
-
-    }
-
-
 }
 
 

@@ -23,14 +23,12 @@ public class Save {
             fileChooser.setInitialDirectory(new File(System.getProperty("user.home") + File.separator + "Desktop"));
             fileChooser.getExtensionFilters().addAll(extensionFilterJPG,extensionFilterSVG);
         }
-
         File filepath = fileChooser.showSaveDialog(new Stage());
         try {
             fileWriter = new FileWriter(filepath);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
 
         if(filepath.getName().endsWith(".jpg")){
             if (filepath != null) {
@@ -53,10 +51,6 @@ public class Save {
                 fileWriter.append("</svg>");
                 fileWriter.close();
             }
-
         }
-
-
-
     }
 }

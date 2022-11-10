@@ -89,8 +89,14 @@
                       <ListView id="listView" fx:id="messageListView" layoutX="64.0" layoutY="75.0" prefHeight="464.0" prefWidth="476.0">
 
                 </ListView>
-                      <Label layoutX="168.0" layoutY="27.0" prefHeight="17.0" prefWidth="228.0" text="Online chat" textAlignment="CENTER">
-                </Label>
+                  <Label fx:id="chatLabel" layoutX="295.0" layoutY="27.0" prefHeight="17.0" prefWidth="80.0" text="Label">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Label>
+                      <Label layoutX="259.0" layoutY="27.0" prefHeight="17.0" prefWidth="36.0" text="Chat" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Label>
                   </children>
               </AnchorPane>
          </children>
