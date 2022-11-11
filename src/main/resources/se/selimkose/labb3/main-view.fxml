@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.canvas.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -68,10 +69,13 @@
       </VBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-              <Pane id="canvasPane" prefHeight="720.0" prefWidth="609.0">
+              <Pane id="canvasPane" prefHeight="537.0" prefWidth="543.0">
                   <children>
-                      <Canvas id="canvas" fx:id="canvas" height="620.0" onMouseClicked="#canvasAction" width="610.0" />
+                      <Canvas id="canvas" fx:id="canvas" height="556.0" onMouseClicked="#canvasAction" width="543.0" />
                   </children>
+               <HBox.margin>
+                  <Insets left="40.0" top="65.0" />
+               </HBox.margin>
               </Pane>
               <AnchorPane id="chatPane" prefHeight="720.0" prefWidth="590.0">
                   <children>
@@ -85,19 +89,19 @@
                      </graphic>
                   </Button>
       
-                      <TextField fx:id="textFieldMessage" layoutX="64.0" layoutY="588.0" prefHeight="25.0" prefWidth="353.0" />
-                      <ListView id="listView" fx:id="messageListView" layoutX="64.0" layoutY="75.0" prefHeight="464.0" prefWidth="476.0">
+                      <TextField fx:id="textFieldMessage" layoutX="64.0" layoutY="586.0" prefHeight="35.0" prefWidth="353.0" />
+                      <ListView id="listView" fx:id="messageListView" layoutX="64.0" layoutY="67.0" prefHeight="472.0" prefWidth="476.0">
 
                 </ListView>
-                  <Label fx:id="chatLabel" layoutX="295.0" layoutY="27.0" prefHeight="20.0" prefWidth="46.0" text="Label">
+                  <Label fx:id="chatLabel" layoutX="272.0" layoutY="27.0" prefHeight="20.0" prefWidth="46.0" text="Label">
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                      <Label layoutX="259.0" layoutY="27.0" prefHeight="17.0" prefWidth="36.0" text="Chat" textAlignment="CENTER">
+                      <Label layoutX="241.0" layoutY="27.0" prefHeight="17.0" prefWidth="36.0" text="Chat" textAlignment="CENTER">
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                  <ImageView fitHeight="20.0" fitWidth="17.0" layoutX="344.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="20.0" fitWidth="17.0" layoutX="325.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/icons/wifi%20(1).png" />
                      </image></ImageView>
