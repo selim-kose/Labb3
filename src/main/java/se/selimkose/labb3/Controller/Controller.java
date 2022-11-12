@@ -6,15 +6,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-
 import se.selimkose.labb3.Model.*;
 import se.selimkose.labb3.Model.Shape.*;
 import se.selimkose.labb3.Model.Shape.Shape;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -37,7 +34,6 @@ public class Controller implements Initializable {
     public TextField textFieldMessage;
     @FXML
     public ListView<String> messageListView;
-
     public Label chatLabel;
 
 
